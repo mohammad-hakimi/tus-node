@@ -1,13 +1,13 @@
-# tus-node-server
-[![npm version](https://badge.fury.io/js/tus-node-server.svg)](https://badge.fury.io/js/tus-node-server)
-[![Build Status](https://github.com/tus/tus-node-server/actions/workflows/ci.yml/badge.svg)](https://github.com/tus/tus-node-server/actions/workflows/ci.yml)
+# tus-node
+### Powered by tus-node-server
+[![npm version](https://badge.fury.io/js/tus-node-server.svg)](https://badge.fury.io/js/tus-node)
 
 tus is a new open protocol for resumable uploads built on HTTP. This is the [tus protocol 1.0.0](http://tus.io/protocols/resumable-upload.html) node.js server implementation.
 
 ## Installation
 
 ```bash
-$ npm install tus-node-server
+$ npm install tus-node
 ```
 
 ## Flexible Data Stores
@@ -54,7 +54,7 @@ $ docker run -p 1080:8080 -d bhstahl/tus-node-deploy
 
 #### Build a standalone server yourself
 ```js
-const tus = require('tus-node-server');
+const tus = require('tus-node');
 
 const server = new tus.Server();
 server.datastore = new tus.FileStore({
@@ -68,10 +68,10 @@ server.listen({ host, port }, () => {
 });
 ```
 
-#### Use tus-node-server as [Express Middleware](http://expressjs.com/en/guide/using-middleware.html)
+#### Use tus-node as [Express Middleware](http://expressjs.com/en/guide/using-middleware.html)
 
 ```js
-const tus = require('tus-node-server');
+const tus = require('tus-node');
 const server = new tus.Server();
 server.datastore = new tus.FileStore({
     path: '/files'
@@ -88,13 +88,13 @@ const port = 1080;
 app.listen(port, host);
 ```
 
-#### Use tus-node-server with [Koa](https://github.com/koajs/koa) or plain Node server
+#### Use tus-node with [Koa](https://github.com/koajs/koa) or plain Node server
 
 ```js
 const http = require('http');
 const url = require('url');
 const Koa = require('koa')
-const tus = require('tus-node-server');
+const tus = require('tus-node');
 const tusServer = new tus.Server();
 
 const app = new Koa();
@@ -119,10 +119,10 @@ const server = http.createServer((req, res) => {
 server.listen(port)
 ```
 
-#### Use tus-node-server with [Fastify](https://www.fastify.io)
+#### Use tus-node with [Fastify](https://www.fastify.io)
 
 ```js
-const tus = require('tus-node-server');
+const tus = require('tus-node');
 const tusServer = new tus.Server();
 tusServer.datastore = new tus.FileStore({
     path: '/files',
@@ -166,8 +166,8 @@ fastify.listen(3000, (err) => {
 Execute code when lifecycle events happen by adding event handlers to your server.
 
 ```js
-const Server = require('tus-node-server').Server;
-const EVENTS = require('tus-node-server').EVENTS;
+const Server = require('tus-node').Server;
+const EVENTS = require('tus-node').EVENTS;
 
 const server = new Server();
 server.on(EVENTS.EVENT_UPLOAD_COMPLETE, (event) => {
